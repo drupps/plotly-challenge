@@ -18,4 +18,8 @@ var location = [];
 var bbtype = [];
 var wfreq = [];
 
-
+function unpack(rows, index) {
+    return rows.map(function(row) {
+        return row[index];
+    });
+}
