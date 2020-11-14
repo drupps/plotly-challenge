@@ -10,22 +10,32 @@
 
 
 var names = [];
-var id = [];
-var ethnicity = [];
-var gender = [];
-var age = [];
-var location = [];
-var bbtype = [];
-var wfreq = [];
+// var id = [];
+// var ethnicity = [];
+// var gender = [];
+// var age = [];
+// var location = [];
+// var bbtype = [];
+// var wfreq = [];
 
-d3.json("../samples.json").then((data) => {
-    //  Create the Traces
+
+
+d3.json("samples.json").then((data) => {
+    console.log(data);
+
+    data.names.forEach(function(
+        
+    ))
+
+    var dropdownMenu = d3.select("#selDataset");
+
+     //Create the Traces
     var trace1 = {
-      x: data.organ,
-      y: data.survival.map(val => Math.sqrt(val)),
-      type: "box",
-      name: "Cancer Survival",
-      boxpoints: "all"
+      x: data.id,
+      y: data.otu_ids,
+      type: "bar",
+      name: "Top 10 OTUs",
+    //   boxpoints: "all"
     };
   
     // Create the data array for the plot
@@ -33,11 +43,11 @@ d3.json("../samples.json").then((data) => {
   
     // Define the plot layout
     var layout = {
-      title: "Square Root of Cancer Survival by Organ",
-      xaxis: { title: "Organ" },
-      yaxis: { title: "Square Root of Survival" }
+      title: "Prevalence of OTUs in bellybutton's",
+      xaxis: { title: "Sample Values" },
+      yaxis: { title: "OTU ID's" }
     };
   
     // Plot the chart to a div tag with id "plot"
-    Plotly.newPlot("plot", data, layout);
+    Plotly.newPlot("bar", data, layout);
   });
