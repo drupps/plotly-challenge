@@ -17,7 +17,7 @@ d3.json("samples.json").then(data => {
         .property('value', d)
     });
 
-    var values = data.va
+    var values = data.samples[0].sample_values.slice()
 
 
     data.names.forEach(function(
