@@ -11,13 +11,15 @@ d3.json("samples.json").then(data => {
 
     names.forEach(d => {
 
-        d3.select('#selDataset')
-        .append('option');
-        .text(d);
+        d3.select('#selDataset'),
+        .append('option'),
+        .text(d),
         .property('value', d)
     });
 
-    var values = data.samples[0].sample_values.slice()
+    var values = data.samples[0].sample_values.slice(0, 10);
+    var ids = data.samples[0].out_ids.slice(0, 10);
+    var labels = data.samples[0].out_ids//??????
 
 
     data.names.forEach(function(
