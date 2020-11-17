@@ -9,12 +9,12 @@ d3.json("samples.json").then(data => {
     //console.log(names);
 
     //forEach to populate ?? not entirely sure if this is needed..
-    names.forEach(d => {
-        d3.select('#selDataset')
-        .append('option')
-        .text(d)
-        .property('value', d)
-    });
+    // names.forEach(d => {
+    //     d3.select('#selDataset')
+    //     .append('option')
+    //     .text(d)
+    //     .property('value', d)
+    // });
 
     //settting up the values of the top ten otus
     var values = data.samples[0].sample_values.slice(0, 10).reverse();
@@ -27,8 +27,8 @@ d3.json("samples.json").then(data => {
         
 
 
-    //Create the Traces
-    var trace1 = {
+    //Create the bar trace
+    var traceBar = {
     x: values,
     y: ids,
     type: "bar",
@@ -39,24 +39,38 @@ d3.json("samples.json").then(data => {
     };
 
     //layout of the bar plot
-    var layout = {
+    var barLayout = {
 
         //creating the title with text from the id's
         title: {
             text: `ID: ${values}` //i'm not a fan of backticks
         },
         xaxis: {
-            //the xaxis title
+            //xaxis title
             title: 'Sample Values'
+        },
+        yaxis: {
+            //yaxis title
+            title: 'Sample ID'
         }
     }
 
+    //bubble plot
+    var bubblePlot = {
+
+    }
+
+
+
+
+
 
 //setting up trace1 to the plotBar var
-var plotBar = [trace1]
+var plotBar = [traceBar];
 
 //actual plotting of the bar
 Plotly.newPlot('bar', plotBar)
 
-
+//to do: optionChange!
+//to do: initial bar chart on page load
 });
