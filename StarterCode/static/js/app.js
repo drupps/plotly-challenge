@@ -36,5 +36,5 @@ d3.json("samples.json").then(data => {
 var plotBar = [trace1]
 
 //actual plotting of the bar
-plotly.newPlot('bar', plotBar)
+Plotly.newPlot('bar', plotBar)
 });
