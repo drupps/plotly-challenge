@@ -18,10 +18,10 @@ d3.json("samples.json").then(data => {
     var values = data.samples[0].sample_values.slice(0, 10);
 
     //setting up the id's for the top ten
-    var ids = data.samples[0].out_ids.slice(0, 10);
+    var ids = data.samples[0].out_ids.slice(0, 10).map(d => );
 
     //setting up the labels for the top ten
-    var labels = data.samples[0].out_lables.slice(0, 10);
+    var labels = data.samples[0].out_labels.slice(0, 10);
         
     
 // //start of the dropdown menu
