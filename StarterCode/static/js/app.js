@@ -5,7 +5,7 @@
 d3.json("samples.json").then(data => {
     //console.log(data);
 
-    var names = data.names
+    // var names = data.names
     //console.log(names);
 
     //forEach to populate ?? not entirely sure if this is needed..
@@ -16,13 +16,13 @@ d3.json("samples.json").then(data => {
     //     .property('value', d)
     // });
 
-    //settting up the values of the top ten otus
+    //settting up the values of the top ten samples
     var values = data.samples[0].sample_values.slice(0, 10).reverse();
 
     //setting up the id's for the top ten and call it OTU!
     var ids = data.samples[0].otu_ids.slice(0, 10).map(d => `OTU ${d}`).reverse();
 
-    //setting up the labels for the top ten
+    //setting up the labels for the top ten samples
     var labels = data.samples[0].otu_labels.slice(0, 10).reverse();
         
 
@@ -39,7 +39,7 @@ d3.json("samples.json").then(data => {
     };
 
     //layout of the bar plot
-    var barLayout = {
+    var layoutBar = {
 
         //creating the title with text from the id's
         title: {
@@ -55,8 +55,18 @@ d3.json("samples.json").then(data => {
         }
     }
 
-    //bubble plot
+    //bubble plot static
     var bubblePlot = {
+        // don't need data.??? i already set the variables
+        //x and y values plus text, not sure what to do with this
+        x: values.otu_ids,
+        y: labels.sample_values,
+        text: otu_ids.otu_labels,
+        //setting up the bubble plot marker size and color
+        mode: 'markers',
+        marker:{
+            size: sample_values
+        }
 
     }
 
@@ -65,12 +75,5 @@ d3.json("samples.json").then(data => {
 
 
 
-//setting up trace1 to the plotBar var
-var plotBar = [traceBar];
-
-//actual plotting of the bar
-Plotly.newPlot('bar', plotBar)
-
-//to do: optionChange!
-//to do: initial bar chart on page load
+//don't forget to bring back the trace and plotting. it's saved in to_do.txt
 });
