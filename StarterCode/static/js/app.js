@@ -21,8 +21,6 @@ function optionChanged(changed_id) {
   d3.json("samples.json").then((data) => {
     //console.log(data);
 
-    
-
     var names = data.names;
     //console.log(names);
 
