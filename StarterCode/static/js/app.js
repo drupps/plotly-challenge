@@ -21,17 +21,11 @@ function optionChanged(changed_id) {
   d3.json("samples.json").then((data) => {
     //console.log(data);
 
-    var samples = data.samples;
-    //console.log(samples);
     
-    //filtering samples and saving it to changed_id
-    var results = samples.filter((sampleObj) => sampleObj.id == changed_id);
-    var result = results[0];
 
     var names = data.names;
     //console.log(names);
 
-    //settting up the values of the top ten samples
     var values = data.samples[0].sample_values.slice(0, 10).reverse();
 
     //setting up the id's for the top ten and call it OTU!
@@ -74,6 +68,59 @@ function optionChanged(changed_id) {
     var plotBar = [traceBar];
 
     //actual plotting of the bar
-    Plotly.newPlot("bar", traceBar, layoutBar);
+    Plotly.newPlot("bar", plotBar, layoutBar);
+
+    var results = values.filter((sampleObj) => sampleObj.id == changed_id);
+    var result = results[0];
+
+    var ids = result.ids;
+    var labels = result.labels;
+    var sample_values = result.sample_values;
+
+    var bubble_trace = {
+      x: ids,
+      y: sample_values,
+      text: labels,
+      mode: "markers",
+      marker: {
+        size: sample_values,
+        color: otu_ids,
+        colorscale: "Earth",
+      },
+    };
+
+    var data = [bubble_trace];
+
+    var bubble_layout = {
+      hovermode: "closest",
+      xaxis: { title: "OTU ID" },
+      margin: { t: 30 },
+    };
+
+    Plotly.newPlot("bubble", data, bubble_layout);
+  });
+
+  // Demo stats
+  d3.json("samples.json").then((data) => {
+    var metadata = data.metadata;
+
+    console.log("metadata");
+    console.log(metadata);
+
+    var results = metadata.filter(
+      (metadataObj) => metadataObj.id == changed_id
+    );
+    var result = results[0];
+
+    console.log("metadata");
+    console.log(metadata);
+
+    var fig = d3.select("#sample-metadata");
+
+    fig.html("");
+
+    Object.entries(result).forEach(([key, value]) => {
+      fig.append("h5").text(`${key}: ${value}`);
+    });
   });
 }
